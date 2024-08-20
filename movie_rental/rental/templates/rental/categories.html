@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Categories - Galaxy Torrents</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'rental/css/styles.css' %}" />
+    <script src="{% static 'rental/js/sidebar.js' %}"></script>
+  </head>
+  <body
+    style="
+      background: url('{% static 'rental/images/galaxy.jpg' %}') no-repeat
+        center center;
+      background-size: cover;
+      background-attachment: fixed;
+    "
+  >
+    <header>
+      <span class="burger-icon" onclick="toggleSidebar()">&#9776;</span>
+      <h1>Categories</h1>
+    </header>
+
+    <div class="container">
+      <div class="content-wrapper">
+        <!-- Sidebar included here -->
+        {% include 'rental/sidebar.html' %}
+
+        <!-- Categories Section -->
+        <div class="categories-container">
+          <h2>All Categories</h2>
+
+          <!-- Search Form -->
+          <form
+            method="get"
+            action="{% url 'categories' %}"
+            class="search-form"
+          >
+            <input
+              type="text"
+              name="search"
+              placeholder="Search for a category..."
+              value="{{ request.GET.search }}"
+              class="search-input"
+            />
+            <button type="submit" class="btn search-btn">Search</button>
+          </form>
+
+          <!-- Categories and Movies List -->
+          <div class="category-list">
+            {% for category in categories %}
+            <div class="category">
+              <h3>{{ category.name }}</h3>
+              <ul>
+                {% for movie in category.movie_set.all %}
+                <li>
+                  <a href="{% url 'movie_detail' movie.id %}"
+                    >{{ movie.title }}</a
+                  >
+                </li>
+                {% empty %}
+                <li>No movies in this category.</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2077 Enterprise Torrents</p>
+    </footer>
+  </body>
+</html>

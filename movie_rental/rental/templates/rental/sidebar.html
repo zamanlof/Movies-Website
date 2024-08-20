@@ -1,0 +1,13 @@
+<div id="sidebar" class="sidebar">
+  <span class="burger-icon" onclick="toggleSidebar()">&#9776;</span>
+  <!-- Add this burger icon -->
+  <div class="sidebar-heading">
+    <h2>Dashboard</h2>
+  </div>
+  <ul>
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'categories' %}">Categories</a></li>
+    <li><a href="{% url 'downloads' %}">Downloads</a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+  </ul>
+</div>

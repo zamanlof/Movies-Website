@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login to Galaxy Torrents</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'rental/css/login.css' %}" />
+  </head>
+  <body
+    style="
+      background: url('{% static 'rental/images/galaxy.jpg' %}') no-repeat
+        center center;
+      background-size: cover;
+      background-attachment: fixed;
+    "
+  >
+    <div class="login-container">
+      <div class="login-box">
+        <h2>Welcome Aboard</h2>
+        <form onsubmit="validateLogin(event)">
+          {% csrf_token %}
+          <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" required />
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required />
+          </div>
+          <button type="submit" class="btn">Sign In</button>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script>
+    function validateLogin(event) {
+      event.preventDefault(); // Prevent the form from submitting
+
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      if (username === "user" && password === "1234") {
+        window.location.href = "{% url 'home' %}"; // Redirect to home page after successful login
+      } else {
+        alert("Invalid username or password.");
+      }
+    }
+  </script>
+</html>

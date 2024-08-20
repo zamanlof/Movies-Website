@@ -1,0 +1,599 @@
+::selection {
+  background: rgb(69, 69, 69); /* Removes the background color */
+  color: inherit; /* Keeps the text color unchanged (optional) */
+}
+
+::-moz-selection {
+  /* For Firefox */
+  background: grey;
+  color: inherit;
+}
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-repeat: no-repeat;
+  background-size: cover; /* Ensure the background covers the entire viewport */
+  background-attachment: fixed;
+  overflow: auto;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease;
+}
+
+header {
+  background-color: rgba(51, 51, 51, 0.6); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  position: fixed; /* Fixed position to stick to the top */
+  width: 100%; /* Ensure it spans the full width of the viewport */
+  top: 0; /* Aligns to the top of the viewport */
+  z-index: 1000; /* Ensure it stays above other content */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a slight shadow for better separation */
+}
+/* Adjust other styles as necessary to ensure content looks good with the new header */
+h1 {
+  margin: 0;
+  font-size: 36px;
+}
+.introduction {
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: rgba(51, 51, 51, 0.6); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  text-align: center;
+  gap: 20px;
+  border-radius: 30px;
+}
+
+.introduction h2 {
+  color: #f2d2f4;
+  font-size: 70px; /* Larger font size for a full-screen header */
+  margin-bottom: 20px;
+}
+
+.introduction p {
+  font-size: 18px; /* Slightly larger font size for readability */
+  line-height: 2;
+  color: #f2d2f4;
+  max-width: 800px; /* Limit the width of the text for better readability */
+  margin: 0 auto; /* Center the text */
+}
+
+/* Burger icon in the header */
+.burger-icon {
+  color: #f5e0f4;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* Auth buttons in the header */
+.auth-buttons {
+  position: absolute;
+  right: 60px;
+  top: 30px;
+}
+
+.auth-buttons .btn {
+  background-color: rgba(255, 255, 255, 0); /* Semi-transparent buttons */
+  color: #f2d2f4;
+  padding: 10px 15px;
+  text-decoration: none;
+  border: none;
+  margin-left: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.auth-buttons .btn:hover {
+  transition: 0.3s;
+  background-color: rgba(
+    186,
+    151,
+    221,
+    0.9
+  ); /* Slightly more opaque on hover */
+  color: #4e197c;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 250px;
+  height: 100%;
+  background-color: rgba(51, 51, 51, 0.6); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  position: fixed;
+  top: 0;
+  left: -250px; /* Hidden by default */
+  transition: left 0.3s ease; /* Smooth slide-in/out effect */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+.sidebar-heading {
+  font-size: 20px;
+  color: #353535;
+  line-height: 70px;
+  text-align: left;
+  user-select: none;
+  font-family: inherit;
+}
+.sidebar a {
+  display: block;
+  height: 65px;
+  width: 100%;
+  color: #f5e0f4;
+  line-height: 65px;
+  padding-left: 30px;
+  box-sizing: border-box;
+  border-left: 5px solid transparent;
+  font-family: "Lato", sans-serif;
+  transition: all 0.5s ease;
+}
+.sidebar a.active,
+.sidebar a:hover {
+  border-left: 5px solid #8562b9;
+  color: #8438ff;
+}
+
+.sidebar.active {
+  left: 0; /* Sidebar slides in */
+}
+.sidebar-heading h2 {
+  color: aliceblue;
+  margin-top: 27px;
+  margin-left: 75px;
+}
+
+/* Main content styles */
+.main-content {
+  padding-top: 80px; /* Adjust padding to avoid content being hidden under the header */
+  transition: margin-left 0.3s ease;
+}
+
+.main-content.shifted {
+  margin-left: 250px; /* Main content shifts to the right when sidebar is visible */
+}
+
+/* Container styles */
+.container {
+  max-width: 100%; /* Ensures the container doesn't exceed the viewport width */
+  margin: 0 auto; /* Center-aligns the container */
+  padding-left: 20px; /* Add padding to avoid content overlap */
+  transition: padding-left 0.3s ease;
+  padding: 90px;
+}
+
+.container.shifted {
+  padding-left: 270px; /* Adjust padding when sidebar is active */
+}
+
+/* Movie list styles */
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* Reduced min-width for smaller cards */
+  gap: 30px; /* Slightly reduced gap between cards */
+  justify-content: center;
+  padding: 15px; /* Reduced padding around the grid */
+}
+
+.movie-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+  border-radius: 10px;
+}
+
+.movie-card .movie-title {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 8px; /* Slightly reduced padding */
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 16px; /* Slightly reduced font size */
+  transition: background 0.3s ease;
+  border-radius: 0 0 10px 10px;
+}
+
+/* Hover effects for movie cards */
+.movie-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.movie-card:hover img {
+  transform: scale(1.05);
+}
+
+.movie-card:hover .movie-title {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.movie-item {
+  text-align: center;
+}
+
+.movie-item img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.movie-item h3 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+/* Footer styles */
+footer {
+  display: inline-flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(51, 51, 51, 0.6); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+footer a {
+  display: flex;
+  justify-content: flex-start;
+  height: 40px;
+  width: 100%;
+  color: #f5e0f4;
+  line-height: 30px;
+  padding-left: 30px;
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+  transition: all 0.5s ease;
+}
+footer .active,
+a:hover {
+  color: #cfb1ff;
+}
+
+/* Movie Detail Styles */
+.movie-detail-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.movie-image-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.movie-image {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.release-date {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.category-container {
+  margin-bottom: 20px;
+}
+
+.category-label {
+  font-weight: bold;
+  color: #333;
+}
+
+.category-name {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: none;
+  color: #8562b9;
+  border-radius: 5px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.category-name:hover {
+  transform: scale(1.1);
+  color: #cfb1ff;
+}
+
+.description-container {
+  background-color: rgba(51, 51, 51, 0.6); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.description-container h2 {
+  color: #e9d7ff;
+  font-size: 30px;
+  margin-bottom: 15px;
+  line-height: 70px;
+  text-align: center;
+}
+
+.description-container p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #ffffff;
+}
+
+/* Styles for Download Button */
+.download-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px; /* Space above the button */
+}
+.release-date {
+  color: #aca0ba;
+}
+.category-label {
+  color: #e9d7ff;
+}
+
+.download-btn {
+  background-color: #e9d7ff;
+  color: rgb(99, 99, 99);
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease,
+    box-shadow 0.3s ease;
+  margin-bottom: 100px;
+}
+
+.download-btn:hover {
+  transform: scale(1.05);
+  background-color: #0056b3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+/* Downloads Container Styles */ /* Downloads Container Styles */ /* Downloads Container Styles */ /* Downloads Container Styles */
+
+/* Downloads Container Styles */
+.downloads-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(51, 51, 51, 0.6); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.downloads-container h2 {
+  color: #f2d2f4;
+  font-size: 24px;
+  margin-bottom: 15px;
+  text-align: left;
+  line-height: 70px;
+}
+
+/* Downloads List Styles */
+.downloads-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.downloads-list li {
+  color: #f05766;
+}
+
+.downloads-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: rgba(51, 51, 51, 0.6); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.downloads-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(224, 171, 255, 0.1);
+}
+
+.movie-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #cfb1ff;
+  flex-grow: 1;
+}
+
+/* Button Container to Right Align Buttons */
+.button-container {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+}
+
+/* Button Styles */
+.btn {
+  background-color: #d0acff;
+  color: rgb(35, 35, 35);
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #8d74ac;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.remove-btn {
+  background-color: #f05766;
+}
+
+.remove-btn:hover {
+  background-color: #ae1f2d;
+}
+
+/* Search Form Styles */ /* Search Form Styles */ /* Search Form Styles */ /* Search Form Styles */ /* Search Form Styles */
+.search-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  padding: 10px 15px;
+  width: 60%;
+  max-width: 400px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  background-color: rgba(51, 51, 51, 0.6); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  color: #ffffff;
+  font-size: 16px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-input:focus {
+  background-color: rgba(51, 51, 51, 0.896); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  outline: none;
+}
+
+.search-btn {
+  padding: 10px 20px;
+  border: 2px solid #e9d7ff;
+  border-radius: 0 5px 5px 0;
+  background-color: #e9d7ff;
+  color: rgba(73, 36, 146, 0.675);
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.search-btn:hover {
+  background-color: #be88ff;
+  border-color: #be88ff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Categories Container Styles */
+.categories-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(51, 51, 51, 0.6); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.categories-container h2 {
+  color: #e9d7ff;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: left;
+  line-height: 70px;
+}
+
+.category-list {
+  margin-top: 20px;
+}
+
+.category {
+  margin-bottom: 30px;
+}
+
+.category h3 {
+  font-size: 20px;
+  color: #f0e3ff;
+  margin-bottom: 10px;
+}
+
+.category ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category li {
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.category li a {
+  text-decoration: none;
+  color: #cfb1ff;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.category li:hover {
+  background-color: #f3dfff53;
+  transform: scale(1.02);
+  color: #e9d7ff;
+}
+
+.category li a:hover {
+  color: #ffffff;
+}

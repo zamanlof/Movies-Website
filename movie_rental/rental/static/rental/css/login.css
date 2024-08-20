@@ -1,0 +1,77 @@
+/* Gradient background for the login page */
+body {
+  background: linear-gradient(to right, #362a4b, #2e2936);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+/* Login container styling */
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: rgba(51, 51, 51, 0.6); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Login box styling */
+.login-box {
+  margin: 0 auto;
+}
+
+.login-box h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #eedafe;
+}
+
+/* Input fields styling */
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #eedafe;
+}
+
+.input-group input {
+  color: white;
+  width: 96%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: rgba(62, 62, 62, 0); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+}
+
+/* Sign in button styling */
+.btn {
+  margin-top: 20px;
+  width: 50%;
+  padding: 10px;
+  background-color: #756793;
+  color: #eedafe;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #4e4561;
+}

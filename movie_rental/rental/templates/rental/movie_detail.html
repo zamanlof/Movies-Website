@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ movie.title }} - Galaxy Torrents</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'rental/css/styles.css' %}" />
+    <script src="{% static 'rental/js/sidebar.js' %}"></script>
+  </head>
+  <body
+    style="
+      background: url('{% static 'rental/images/galaxy.jpg' %}') no-repeat
+        center center;
+      background-size: cover;
+      background-attachment: fixed;
+    "
+  >
+    <header>
+      <span class="burger-icon" onclick="toggleSidebar()">&#9776;</span>
+      <h1>{{ movie.title }}</h1>
+    </header>
+
+    <div class="container">
+      <div class="content-wrapper">
+        <!-- Sidebar included here -->
+        {% include 'rental/sidebar.html' %}
+
+        <!-- Movie Detail Section -->
+        <div class="movie-detail-container">
+          <div class="movie-image-container">
+            <img
+              src="{% static 'rental/images/'|add:movie.image %}"
+              alt="{{ movie.title }}"
+              class="movie-image"
+            />
+          </div>
+          <p class="release-date">Release Date: {{ movie.release_date }}</p>
+          <div class="category-container">
+            <span class="category-label">Category:</span>
+            <span class="category-name">{{ movie.category.name }}</span>
+          </div>
+          <div class="description-container">
+            <h2>Description</h2>
+            <p>{{ movie.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Button to add movie to downloads list -->
+    <div class="download-button-container">
+      <form method="post" action="{% url 'add_to_downloads' movie.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn download-btn">Add to Downloads</button>
+      </form>
+    </div>
+
+    <footer>
+      <p><a href="{% url 'home' %}">Home</a></p>
+      <p><a href="{% url 'about' %}">About</a></p>
+    </footer>
+  </body>
+</html>

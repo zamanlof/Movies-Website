@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - Galaxy Torrents</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'rental/css/styles.css' %}" />
+    <script src="{% static 'rental/js/sidebar.js' %}"></script>
+    <!-- Reference to sidebar.js -->
+  </head>
+  <body
+    style="
+      background: url('{% static 'rental/images/galaxy.jpg' %}') no-repeat
+        center center;
+      background-size: cover;
+      background-attachment: fixed;
+    "
+  >
+    <header>
+      <span class="burger-icon" onclick="toggleSidebar()">&#9776;</span>
+      <h1>About Us</h1>
+    </header>
+
+    <div class="container">
+      <div class="content-wrapper">
+        <!-- Sidebar included here -->
+        {% include 'rental/sidebar.html' %}
+
+        <!-- About Section -->
+        <div class="introduction">
+          <h2>About Galaxy Torrents</h2>
+          <p>
+            Galaxy Torrents is notable for its community-driven approach. It has
+            active forums where users can engage in discussions, request
+            content, and get assistance with torrent-related issues. This sense
+            of community adds to the overall user experience on the site.
+          </p>
+          <p>
+            Each torrent listing on Galaxy Torrents typically provides
+            comprehensive information, including file size, number of seeders
+            and leechers, and user comments. This information is crucial for
+            users to assess the quality and download speed of the torrents.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p><a href="{% url 'home' %}">Home</a></p>
+    </footer>
+  </body>
+</html>

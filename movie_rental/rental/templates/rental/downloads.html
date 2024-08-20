@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Downloads - Enterprise Torrents</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'rental/css/styles.css' %}" />
+    <script src="{% static 'rental/js/sidebar.js' %}"></script>
+    <!-- Reference to downloads.js -->
+  </head>
+  <body
+    style="
+      background: url('{% static 'rental/images/galaxy.jpg' %}') no-repeat
+        center center;
+      background-size: cover;
+      background-attachment: fixed;
+    "
+  >
+    <header>
+      <span class="burger-icon" onclick="toggleSidebar()">&#9776;</span>
+      <h1>Your Downloads</h1>
+    </header>
+
+    <div class="container">
+      <div class="content-wrapper">
+        <!-- Sidebar included here -->
+        {% include 'rental/sidebar.html' %}
+
+        <!-- Downloads Section -->
+        <div class="downloads-container">
+          <h2>Your Downloaded Movies</h2>
+          <ul class="downloads-list">
+            {% for movie in downloads %}
+            <li class="downloads-item" id="movie-{{ movie.id }}">
+              <span class="movie-title">{{ movie }}</span>
+              <button
+                class="btn remove-btn"
+                onclick="removeDownload('{{ movie.id }}')"
+              >
+                Remove
+              </button>
+            </li>
+            {% empty %}
+            <li>No movies in your downloads list!</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p><a href="{% url 'home' %}">Home</a></p>
+      <p><a href="{% url 'about' %}">About</a></p>
+    </footer>
+
+    <script>
+      function removeDownload(movieId) {
+        // Remove the movie element from the DOM
+        var movieElement = document.getElementById("movie-" + movieId);
+        if (movieElement) {
+          movieElement.remove();
+        }
+      }
+    </script>
+  </body>
+</html>

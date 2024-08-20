@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galaxy Torrents</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'rental/css/styles.css' %}" />
+    <script src="{% static 'rental/js/sidebar.js' %}"></script>
+  </head>
+  <body
+    style="
+      background: url('{% static 'rental/images/galaxy.jpg' %}') no-repeat
+        center center;
+      background-size: cover;
+      background-attachment: fixed;
+    "
+  >
+    <header>
+      <span class="burger-icon" onclick="toggleSidebar()">&#9776;</span>
+      <h1>Explore</h1>
+      <!-- Update this div to redirect both buttons to the login page -->
+      <div class="auth-buttons">
+        <a href="{% url 'login' %}" class="btn">Sign In</a>
+        <!-- Redirects to login.html -->
+        <a href="{% url 'login' %}" class="btn">Log Out</a>
+        <!-- Redirects to login.html -->
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="content-wrapper">
+        <!-- Introduction Section -->
+        <div class="introduction">
+          <h2>Welcome to Galaxy Torrents</h2>
+          <p>
+            Galaxy Torrents is your go-to source for free, high-quality movie
+            downloads. We provide an extensive collection of movies across
+            various genres, all available for you to download at no cost.
+            Whether you're looking for the latest blockbusters or classic films,
+            our site offers something for every movie enthusiast.
+          </p>
+          <p>
+            Galaxy Torrents is a relatively newer player in the torrent website
+            landscape, yet it has quickly gained popularity due to its extensive
+            range of torrent files and user-friendly features. The site
+            specializes in offering a wide variety of content, including movies,
+            TV shows, music, games, ebooks, and software. One of the key aspects
+            of Galaxy Torrents is its clean and intuitive interface, which makes
+            it easy for users to navigate and find the torrents they're looking
+            for. The website is organized into different categories and also
+            includes a search function for more specific queries.
+          </p>
+        </div>
+
+        <!-- Sidebar included here -->
+        {% include 'rental/sidebar.html' %}
+
+        <!-- Main content -->
+        <div class="main-content">
+          <div class="movie-list">
+            {% for movie in movies %}
+            <div class="movie-card">
+              <a href="{% url 'movie_detail' movie.id %}">
+                <img
+                  src="{% static 'rental/images/'|add:movie.image %}"
+                  alt="{{ movie.title }}"
+                />
+                <div class="movie-title">{{ movie.title }}</div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p><a href="#">Home</a></p>
+      <p><a href="{% url 'about' %}">About</a></p>
+      <p><a href="#">&copy; 2077 Galaxy Torrents</a></p>
+    </footer>
+  </body>
+</html>
