@@ -26,6 +26,6 @@ A Django-powered movies library website UI. This project serves as a foundation 
 
 ### 1. Clone the Repository
 ```
-  git clone https://github.com/zamanlof/Movies-Website.git\n
+  git clone https://github.com/zamanlof/Movies-Website.git
   cd Movies-Website
 ```
